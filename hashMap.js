@@ -48,8 +48,19 @@ function createHashMap() {
     }
   }
 
+  function get(key) {
+    const index = hash(key);
+    const node = hashMap[index];
+
+    if (!node) return null;
+    if (node.key !== key) return null;
+
+    return node.value;
+  }
+
   return {
     set,
+    get,
   };
 }
 
