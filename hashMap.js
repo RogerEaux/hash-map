@@ -1,34 +1,9 @@
 import createNode from './node.js';
 
 function createHashMap() {
-  //  Were gonna have our hash array of length 19 using a prime number not too close to 2^n
-  //  And were def gonna use mod method for the hash function
-  //  In this method for creating hash functions, we map a key into one of the slots of table by
-  //  taking the remainder of key divided by table_size. That is, the hash function is
-
-  //  h(key) = key mod table_size
-  //  i.e. key % table_size
-
-  //  Props
-
-  //  Capacity
-  //  Length
-  //  Load factor = Length / Capacity
-
-  //  Thing to consider
-
-  //  if (index < 0 || index >= buckets.length) {
-  //    throw new Error("Trying to access index out of bound");
-  //  }
-
   const hashMap = [];
   let capacity = 19;
   let size = 0;
-  const loadFactor = size / capacity;
-
-  function length() {
-    return size;
-  }
 
   function hash(key) {
     let hashCode = 0;
@@ -41,12 +16,73 @@ function createHashMap() {
     return hashCode % capacity;
   }
 
+  function length() {
+    console.log(capacity, size / capacity, hashMap);
+    return size;
+  }
+
+  function keys() {
+    const existingKeys = [];
+
+    for (let i = 0; i < hashMap.length; i += 1) {
+      if (hashMap[i]) {
+        existingKeys.push(hashMap[i].key);
+      }
+    }
+
+    return existingKeys;
+  }
+
+  function values() {
+    const existingValues = [];
+
+    for (let i = 0; i < hashMap.length; i += 1) {
+      if (hashMap[i]) {
+        existingValues.push(hashMap[i].value);
+      }
+    }
+
+    return existingValues;
+  }
+
+  function entries() {
+    const existingEntries = [];
+
+    for (let i = 0; i < hashMap.length; i += 1) {
+      if (hashMap[i]) {
+        existingEntries.push([hashMap[i].key, hashMap[i].value]);
+      }
+    }
+
+    return existingEntries;
+  }
+
+  function grow() {
+    const rehash = entries();
+    capacity *= 2;
+    hashMap.length = 0;
+
+    rehash.forEach(([key, value]) => {
+      const index = hash(key);
+
+      if (!hashMap[index]) {
+        hashMap[index] = createNode(key, value);
+      } else {
+        hashMap[index].key = key;
+        hashMap[index].value = value;
+      }
+    });
+  }
+
   function set(key, value) {
     const index = hash(key);
 
     if (!hashMap[index]) {
       hashMap[index] = createNode(key, value);
       size += 1;
+      if (size / capacity > 0.75) {
+        grow();
+      }
     } else {
       hashMap[index].key = key;
       hashMap[index].value = value;
@@ -88,42 +124,6 @@ function createHashMap() {
   function clear() {
     hashMap.length = 0;
     size = 0;
-  }
-
-  function keys() {
-    const existingKeys = [];
-
-    for (let i = 0; i < hashMap.length; i += 1) {
-      if (hashMap[i]) {
-        existingKeys.push(hashMap[i].key);
-      }
-    }
-
-    return existingKeys;
-  }
-
-  function values() {
-    const existingValues = [];
-
-    for (let i = 0; i < hashMap.length; i += 1) {
-      if (hashMap[i]) {
-        existingValues.push(hashMap[i].value);
-      }
-    }
-
-    return existingValues;
-  }
-
-  function entries() {
-    const existingEntries = [];
-
-    for (let i = 0; i < hashMap.length; i += 1) {
-      if (hashMap[i]) {
-        existingEntries.push([hashMap[i].key, hashMap[i].value]);
-      }
-    }
-
-    return existingEntries;
   }
 
   return {
