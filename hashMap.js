@@ -42,6 +42,7 @@ function createHashMap() {
 
     if (!hashMap[index]) {
       hashMap[index] = createNode(key, value);
+      length += 1;
     } else {
       hashMap[index].key = key;
       hashMap[index].value = value;
