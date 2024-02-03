@@ -90,6 +90,42 @@ function createHashMap() {
     size = 0;
   }
 
+  function keys() {
+    const existingKeys = [];
+
+    for (let i = 0; i < hashMap.length; i += 1) {
+      if (hashMap[i]) {
+        existingKeys.push(hashMap[i].key);
+      }
+    }
+
+    return existingKeys;
+  }
+
+  function values() {
+    const existingValues = [];
+
+    for (let i = 0; i < hashMap.length; i += 1) {
+      if (hashMap[i]) {
+        existingValues.push(hashMap[i].value);
+      }
+    }
+
+    return existingValues;
+  }
+
+  function entries() {
+    const existingEntries = [];
+
+    for (let i = 0; i < hashMap.length; i += 1) {
+      if (hashMap[i]) {
+        existingEntries.push([hashMap[i].key, hashMap[i].value]);
+      }
+    }
+
+    return existingEntries;
+  }
+
   return {
     length,
     set,
@@ -97,6 +133,9 @@ function createHashMap() {
     has,
     remove,
     clear,
+    keys,
+    values,
+    entries,
   };
 }
 
