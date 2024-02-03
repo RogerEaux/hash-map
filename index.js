@@ -15,3 +15,7 @@ console.log('Has Sapphire', hashMap.has('Sapphire'));
 console.log('Remove Peridot', hashMap.remove('Peridot'));
 console.log('Get Peridot:', hashMap.get('Peridot'));
 console.log('Remove Sapphire', hashMap.remove('Sapphire'));
+console.log('Clear Hashmap');
+hashMap.clear();
+console.log('Get Ruby:', hashMap.get('Ruby'));
+console.log('Length', hashMap.length());

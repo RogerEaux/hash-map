@@ -85,12 +85,18 @@ function createHashMap() {
     return true;
   }
 
+  function clear() {
+    hashMap.length = 0;
+    size = 0;
+  }
+
   return {
     length,
     set,
     get,
     has,
     remove,
+    clear,
   };
 }
 
