@@ -1,4 +1,5 @@
 import createHashMap from './hashMap.js';
+import createHashSet from './hashSet.js';
 
 const hashMap = createHashMap();
 
@@ -22,3 +23,23 @@ console.log('Clear Hashmap');
 hashMap.clear();
 console.log('Entries', hashMap.entries());
 console.log('Length', hashMap.length());
+
+const hashSet = createHashSet();
+
+console.log('\n');
+
+console.log('Length', hashSet.length());
+hashSet.set('Ruby');
+console.log('Set Ruby');
+hashSet.set('Peridot');
+console.log('Set Peridot');
+console.log('Entries', hashSet.entries());
+console.log('Length', hashSet.length());
+console.log('Has Ruby', hashSet.has('Ruby'));
+console.log('Has Sapphire', hashSet.has('Sapphire'));
+console.log('Remove Peridot', hashSet.remove('Peridot'));
+console.log('Remove Sapphire', hashSet.remove('Sapphire'));
+console.log('Clear Hashset');
+hashSet.clear();
+console.log('Entries', hashSet.entries());
+console.log('Length', hashSet.length());
