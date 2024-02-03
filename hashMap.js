@@ -1,3 +1,5 @@
+import createNode from './node.js';
+
 function createHashMap() {
   //  Were gonna have our hash array of length 19 using a prime number not too close to 2^n
   //  And were def gonna use mod method for the hash function
@@ -19,6 +21,7 @@ function createHashMap() {
   //    throw new Error("Trying to access index out of bound");
   //  }
 
+  const hashMap = [];
   let capacity = 19;
   let length = 0;
   let loadFactor = length / capacity;
@@ -32,6 +35,17 @@ function createHashMap() {
     }
 
     return hashCode % capacity;
+  }
+
+  function set(key, value) {
+    const index = hash(key);
+
+    if (!hashMap[index]) {
+      hashMap[index] = createNode(key, value);
+    } else {
+      hashMap[index].key = key;
+      hashMap[index].value = value;
+    }
   }
 
   return {
