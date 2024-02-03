@@ -69,10 +69,23 @@ function createHashMap() {
     return true;
   }
 
+  function remove(key) {
+    const index = hash(key);
+    const node = hashMap[index];
+
+    if (!node) return false;
+    if (node.key !== key) return false;
+    hashMap[index] = null;
+    length -= 1;
+
+    return true;
+  }
+
   return {
     set,
     get,
     has,
+    remove,
   };
 }
 
