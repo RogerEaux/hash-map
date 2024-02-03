@@ -17,7 +17,6 @@ function createHashMap() {
   }
 
   function length() {
-    console.log(capacity, size / capacity, hashMap);
     return size;
   }
 
