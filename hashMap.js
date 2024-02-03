@@ -23,8 +23,12 @@ function createHashMap() {
 
   const hashMap = [];
   let capacity = 19;
-  let length = 0;
-  const loadFactor = length / capacity;
+  let size = 0;
+  const loadFactor = size / capacity;
+
+  function length() {
+    return size;
+  }
 
   function hash(key) {
     let hashCode = 0;
@@ -42,7 +46,7 @@ function createHashMap() {
 
     if (!hashMap[index]) {
       hashMap[index] = createNode(key, value);
-      length += 1;
+      size += 1;
     } else {
       hashMap[index].key = key;
       hashMap[index].value = value;
@@ -76,12 +80,13 @@ function createHashMap() {
     if (!node) return false;
     if (node.key !== key) return false;
     hashMap[index] = null;
-    length -= 1;
+    size -= 1;
 
     return true;
   }
 
   return {
+    length,
     set,
     get,
     has,
