@@ -13,6 +13,16 @@ function createHashMap() {
   //  Length
   //  Load factor = Length / Capacity
 
+  //  Thing to consider
+
+  //  if (index < 0 || index >= buckets.length) {
+  //    throw new Error("Trying to access index out of bound");
+  //  }
+
+  let capacity = 19;
+  let length = 0;
+  let loadFactor = length / capacity;
+
   function hash(key) {
     let hashCode = 0;
 
@@ -21,10 +31,12 @@ function createHashMap() {
       hashCode = prime * hashCode + key.charCodeAt(i);
     }
 
-    return hashCode;
+    return hashCode % capacity;
   }
 
-  return {};
+  return {
+    set,
+  };
 }
 
 export default createHashMap;
